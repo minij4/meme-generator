@@ -17,5 +17,8 @@ Project is created with:
 
 ## Learned new things 
 * State
+* Forms
+* API
+* useEffect
 
 
