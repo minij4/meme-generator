@@ -15,10 +15,11 @@ and the server will start with this front-end project.
 Project is created with:
 * React.js
 
-## Learned new things 
+## Learned new things
+* Event Listeners
 * State
 * Forms
 * API
-* useEffect
+* Side Effects
 
 
