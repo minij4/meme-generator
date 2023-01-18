@@ -4,23 +4,72 @@ import memesData from "../memesData.js"
 
 
 export default function Meme() {
-    const [memeImage, setImage] = React.useState('');
+    const [meme, setMeme] = React.useState({
+        topText: "",     
+        bottomText: "",
+        randomImage: "http://i.imgflip.com/1bij.jpg"
+    })
+
+    const [allMemeImages, setAllMemeImages] = React.useState(memesData);
+
 
     function getMemeImage() {
-        const memesArray = memesData.data.memes;
-        const randomNumber = Math.floor(Math.random()*memesArray.length);
+        const memesObject = allMemeImages.data.memes;
+        const randomNumber = Math.floor(Math.random()*memesObject.length);
 
-        setImage(memesArray[randomNumber].url);
+        const url = memesObject[randomNumber].url;
+
+        setMeme(prevMeme => ({
+            ...prevMeme,
+            randomImage: url
+        }));
+    }
+
+    function handleChange(event) {
+        const {name, value, type, checked} = event.target
+        setMeme(prevMemeData => {
+            return {
+                ...prevMemeData,
+                [name]: type === "checkbox" ? checked : value
+            }
+        })
+    }
+    function handleSubmit(event) {
+        event.preventDefault()
+        console.log(meme);
     }
 
     return (
-        <main className='meme'>
-            <div className="form">
-                <input type="text" className="form-input"/>
-                <input type="text" className="form-input"/>
-                <button className="form-button" onClick={getMemeImage}>Get a new meme image</button>
+        <main>
+            <form onSubmit={handleSubmit} className="form">
+                <input 
+                    type="text"
+                    placeholder="Top text"
+                    className="form-input"
+                    onChange={handleChange}
+                    name="topText"
+                    value={meme.topText}
+                />
+                <input 
+                    type="text"
+                    placeholder="Bottom text"
+                    className="form-input"
+                    onChange={handleChange}
+                    name="bottomText"
+                    value={meme.bottomText}
+                />
+                <button 
+                    className="form-button"
+                    onClick={getMemeImage}
+                >
+                    Get a new meme image 🖼
+                </button>
+            </form>
+            <div className="meme">
+                <img src={meme.randomImage} className="meme-image" />
+                <h2 className="meme-text top">{meme.topText}</h2>
+                <h2 className="meme-text bottom">{meme.bottomText}</h2>
             </div>
-            <img class="meme-image" src={memeImage}></img>
         </main>
     );
 }
@@ -29,26 +78,3 @@ export default function Meme() {
 
 
 
-
-
-
-// const [isGoingOut, setIsGoingOut] = React.useState("Yes")
-// /**
-//  * Challenge: 
-//  * - Initialize state for `isGoingOut` as a boolean
-//  * - Make it so clicking the div.state--value flips that
-//  *   boolean value (true -> false, false -> true)
-//  * - Display "Yes" if `isGoingOut` is `true`, "No" otherwise
-//  */
-// function changeMind() {
-//     setIsGoingOut(prevState => !prevState)
-// }
-
-// return (
-//     <div className="state">
-//         <h1 className="state--title">Do I feel like going out tonight?</h1>
-//         <div onClick={changeMind} className="state--value">
-//             <h1>{isGoingOut ? "Yes" : "No"}</h1>
-//         </div>
-//     </div>
-// )

@@ -4,12 +4,13 @@ import trollface from "../photos/TrollFace.png";
 
 export default function Header() {
     return (
-        <header className='header'>
-            <div className='header-logo'>
-                <img className='header-image' src={trollface}></img>
-                <p className='header-text'>Meme Generator</p>
-            </div>
-            <p className='header-title'>React Course — Project 3</p>
+        <header className="header">
+            <img 
+                src={trollface}
+                className="header-image"
+            />
+            <h2 className="header-title">Meme Generator</h2>
+            <h4 className="header-project">React Course - Project 3</h4>
         </header>
     );
 }
